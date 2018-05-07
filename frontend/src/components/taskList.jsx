@@ -65,7 +65,7 @@ export default class taskList extends Component {
     render() {
         return (
             <div style={{ background: '#EBEBEB', fontFamily: 'Monospace' }} onMouseDown={(e) => this.onClick(e)}>
-                <h3> {this.state.date.toDateString()} </h3>
+                <h3> {this.state.date.toLocaleString()} </h3>
                 <div style = {{ display: this.state.displayMenu, position: "absolute", top: this.state.top, left: this.state.left }}>
                     <OpenMenu
                         _fetchAll={this.fetchAll.bind(this)}
@@ -75,7 +75,7 @@ export default class taskList extends Component {
                     {
                         this.state.tasks.map(
                             (task =>
-                                <Col key={task._id} span={8}>
+                                <Col key={task._id} sm={{ span: 24 }} lg={{ span : 8}}>
                                     <Task
                                         id={task._id}
                                         name={task.name}

@@ -8,6 +8,11 @@ body {
   background-color: #EBEBEB;
 }
 
+.ant-progress-inner {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .ant-calendar-time-picker-select {
   overflow-y: scroll;
 }

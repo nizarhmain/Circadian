@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, Progress  } from 'antd';
-
+import moment from 'moment'
 
 export default class Task extends Component {
 
@@ -8,39 +8,20 @@ export default class Task extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    
   }
 
-  when() {
+  started() {
+    let startDate = new Date(this.props.startDate)
+    let now = new Date(this.props.now)
+    return moment(startDate).fromNow();
+  }
+
+  finish() {
     let deadline = new Date(this.props.deadline)
     let now = new Date(this.props.now)
-    if (deadline > now) {
-      return {
-        months: Math.abs((deadline.getMonth() +1 ) - (now.getMonth() +1)) + ' months left ',
-        days: Math.abs(deadline.getDate() - now.getDate()) + ' days left ',
-        hours: Math.abs(deadline.getHours() - now.getHours()) + ' hours left ',
-        minutes: Math.abs(deadline.getMinutes() - now.getMinutes()) + ' minutes left '
-      }
-    } else {
-      return {
-        months: Math.abs((deadline.getMonth() +1 )  - (now.getMonth() +1)) + ' months ago ',
-        days: Math.abs(deadline.getDate() - now.getDate()) + ' days ago ',
-        hours: Math.abs(deadline.getHours() - now.getHours()) + ' hours ago ',
-        minutes: Math.abs(deadline.getMinutes() - now.getMinutes()) + ' minutes ago '
-      }
-    }
+    return moment(deadline).fromNow();  
   }
-
-  parseTime() {
-    if(this.when().months !== '0 months ago ' && this.when().months !== '0 months left ' ) {
-      return this.when().months    
-    } else if (this.when().days !== '0 days ago ' && this.when().days !== '0 days left ') {
-      return this.when().days
-    } else if (this.when().hours !== '0 hours ago ' && this.when().hours !== '0 hours left ') {
-      return this.when().hours
-    } else if (this.when().minutes !== '0 minutes ago ' && this.when().minutes !== '0 minutes left ') {
-      return this.when().minutes
-    }
-}
 
   delete(id) {
     var url = '/api/tasks'
@@ -66,15 +47,23 @@ export default class Task extends Component {
     let percentage = ((new Date(this.props.now) - new Date(this.props.startDate)))
     let completion = ((new Date(this.props.deadline) - new Date(this.props.startDate)))
     let finalMath = ((percentage) * 100) / completion
+    let howFar = () => {
+      if(percentage > 0) {
+        return 'End ' + this.finish()
+      } else {
+        return 'starts ' + this.started()
+      }
+    }
+    let time = howFar();
     return (
       <div style={{ padding: '30px' }}>
         <Card title={this.props.name} extra={
           <Button type="default" icon="close" onClick={(e) => this.delete(this.props.id)}>
           </Button>}>
-          Starts the : {new Date(this.props.startDate).toLocaleString()} <br />
-          Deadline : {new Date(this.props.deadline).toLocaleString()} <br />
+          Start : {moment(new Date(this.props.startDate)).calendar()} <br />
+          Deadline : {moment(new Date(this.props.deadline)).calendar() } <br />
           <div> <Progress type="dashboard" percent={Math.trunc(finalMath)} /> <br /></div>
-          {this.parseTime()}
+          { time }
         </Card>
       </div>
     )
