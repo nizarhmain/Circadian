@@ -63,7 +63,6 @@ export default class Task extends Component {
   }
 
   render() {
-    let typeOfDate = this.parseTime().split(" ")[1]
     let percentage = ((new Date(this.props.now) - new Date(this.props.startDate)))
     let completion = ((new Date(this.props.deadline) - new Date(this.props.startDate)))
     let finalMath = ((percentage) * 100) / completion
@@ -74,9 +73,7 @@ export default class Task extends Component {
           </Button>}>
           Starts the : {new Date(this.props.startDate).toLocaleString()} <br />
           Deadline : {new Date(this.props.deadline).toLocaleString()} <br />
-          { typeOfDate === "days" ? <div> <Progress type="dashboard" percent={Math.trunc(finalMath)} /> <br /></div>: "" }
-          { typeOfDate === "hours" ? <div> <Progress type="dashboard" percent={Math.trunc(finalMath)} /> <br /></div>: "" }
-          { typeOfDate === "minutes" ? <div> <Progress type="dashboard" percent={Math.trunc(finalMath)} /> <br /></div>: "" }
+          <div> <Progress type="dashboard" percent={Math.trunc(finalMath)} /> <br /></div>
           {this.parseTime()}
         </Card>
       </div>
