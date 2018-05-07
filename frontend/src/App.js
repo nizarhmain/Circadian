@@ -3,6 +3,7 @@ import './App.css';
 
 import TaskList from './components/taskList.jsx'
 
+//TODO make a modal open on deletion
 
 class App extends Component {
 
