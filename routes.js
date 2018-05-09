@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const task = require('./taskSchema')
+const task = require('./models/taskSchema')
 
 
 // get all
@@ -46,9 +46,6 @@ router.route('/tasks').delete(function (req, res){
 })
 
 router.route('/tasks').put(function(req,res){
-
-    let task_instance = new task({ 'name': req.body.name, 'startDate': req.body.startDate ,'deadline': req.body.deadline })
-
     let query = task.findByIdAndUpdate(
         req.body.id,
         req.body,

@@ -51,7 +51,6 @@ export default class taskList extends Component {
     }
 
     onClick(e) {
-        if (e.nativeEvent.button === 2) {
             if (this.state.displayMenu === "block") {
                 this.setState({ endOpen: false, displayMenu: "none" })
             } else {
@@ -59,7 +58,6 @@ export default class taskList extends Component {
                 this.setState({ top: e.nativeEvent.clientY })
                 this.setState({ left: e.nativeEvent.clientX })
             }
-        }
     }
 
     render() {

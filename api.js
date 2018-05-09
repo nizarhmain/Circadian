@@ -6,9 +6,7 @@ const app = express()
 const config = require('./config.js')
 const mongoose = require('mongoose')
 const routes = require('./routes')
-
-const task = require('./taskSchema')
-
+const stats = require('./stats')
 
 app.use(bodyParser.json())
 //allow react to make requests here
@@ -33,4 +31,8 @@ app.get('/', function(req, res){
 
 app.listen(process.env.PORT || 4000, () => console.log('Example app listening on port ' + process.env.PORT))
 
+// for events
 app.use('/api', routes)
+
+// for stats
+app.use('/api', stats)
