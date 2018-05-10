@@ -3,7 +3,7 @@ import Task from './taskItem.jsx'
 import OpenMenu from './OpenMenu.jsx'
 import { Col, Row } from 'antd';
 
-
+//TODO add an actual button to add events, easier that
 export default class taskList extends Component {
 
     constructor(props) {
@@ -51,6 +51,7 @@ export default class taskList extends Component {
     }
 
     onClick(e) {
+        if (e.nativeEvent.button === 2) {
             if (this.state.displayMenu === "block") {
                 this.setState({ endOpen: false, displayMenu: "none" })
             } else {
@@ -58,36 +59,37 @@ export default class taskList extends Component {
                 this.setState({ top: e.nativeEvent.clientY })
                 this.setState({ left: e.nativeEvent.clientX })
             }
+        }
     }
 
-    render() {
-        return (
-            <div style={{ background: '#EBEBEB', fontFamily: 'Monospace' }} onMouseDown={(e) => this.onClick(e)}>
-                <h3> {this.state.date.toLocaleString()} </h3>
-                <div style = {{ display: this.state.displayMenu, position: "absolute", top: this.state.top, left: this.state.left }}>
-                    <OpenMenu
-                        _fetchAll={this.fetchAll.bind(this)}
-                    />
-                </div>
-                <Row gutter={16}>
-                    {
-                        this.state.tasks.map(
-                            (task =>
-                                <Col key={task._id} sm={{ span: 24 }} lg={{ span : 8}}>
-                                    <Task
-                                        id={task._id}
-                                        name={task.name}
-                                        startDate={task.startDate}
-                                        deadline={task.deadline}
-                                        now={this.state.date.toISOString()}
-                                        _handleDelete={this._handleDelete.bind(this)}
-                                    />
-                                </Col>
+        render() {
+            return (
+                <div style={{ background: '#EBEBEB', fontFamily: 'Monospace' }} onMouseDown={(e) => this.onClick(e)}>
+                    <h3> {this.state.date.toLocaleString()} </h3>
+                    <div style={{ display: this.state.displayMenu, position: "absolute", top: this.state.top, left: this.state.left }}>
+                        <OpenMenu
+                            _fetchAll={this.fetchAll.bind(this)}
+                        />
+                    </div>
+                    <Row gutter={16}>
+                        {
+                            this.state.tasks.map(
+                                (task =>
+                                    <Col key={task._id} sm={{ span: 24 }} lg={{ span: 8 }}>
+                                        <Task
+                                            id={task._id}
+                                            name={task.name}
+                                            startDate={task.startDate}
+                                            deadline={task.deadline}
+                                            now={this.state.date.toISOString()}
+                                            _handleDelete={this._handleDelete.bind(this)}
+                                        />
+                                    </Col>
+                                )
                             )
-                        )
-                    }
-                </Row>
-            </div>
-        )
+                        }
+                    </Row>
+                </div>
+            )
+        }
     }
-}
