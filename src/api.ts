@@ -23,10 +23,10 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(express.static(path.join("../frontend/build/")));
+app.use(express.static(path.join("./frontend/build/")));
 
 app.get('/', function(req: any, res: any){
-	res.sendFile(path.join('../frontend/build/index.html'));
+	res.sendFile(path.join('./frontend/build/index.html'));
  });
 
 app.listen(process.env.PORT || 4000, () => console.log('Example app listening on port ' + process.env.PORT))

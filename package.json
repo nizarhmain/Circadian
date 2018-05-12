@@ -3,7 +3,7 @@
     "node": "8.11.1"
   },
   "scripts": {
-    "start": "tsc && nodemon build/api.js",
+    "start": "tsc && nodemon buildServer/api.js",
     "build": "tsc"
   },
   "dependencies": {
