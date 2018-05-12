@@ -40,6 +40,7 @@ export default class TaskList extends React.Component<{}, IMyState> {
     }
 
     componentDidMount() {
+        console.log(' I am an updated version ')
         this.fetchAll()
     }
 
