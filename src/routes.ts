@@ -2,7 +2,6 @@
 import express from 'express'
 const router = express.Router();
 const task = require('./models/taskSchema')
-
 // get all
 router.route('/tasks').get(function (req: any, res: any) {
     task.find(function (err: any, tasks: any) {

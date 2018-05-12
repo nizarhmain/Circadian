@@ -8,7 +8,9 @@ let Schema = mongoose.Schema
 
 let statSchema = new Schema({
     name: String,
-    coding: Number
+    type: String,
+    duration: Number,
+    date: Date
 })
 
 // compile the model from the schema

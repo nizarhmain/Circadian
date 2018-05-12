@@ -3,8 +3,9 @@
     "node": "8.11.1"
   },
   "scripts": {
-    "start": "tsc && nodemon buildServer/api.js",
-    "build": "tsc"
+    "start": "tsc && node buildServer/api.js",
+    "build": "tsc",
+    "dev": "nodemon -e ts --exec \"npm run start\""
   },
   "dependencies": {
     "body-parser": "^1.18.2",

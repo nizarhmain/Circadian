@@ -10,7 +10,9 @@ const mongoose_1 = __importDefault(require("mongoose"));
 let Schema = mongoose_1.default.Schema;
 let statSchema = new Schema({
     name: String,
-    coding: Number
+    type: String,
+    duration: Number,
+    date: Date
 });
 // compile the model from the schema
 let stat = mongoose_1.default.model('Stat', statSchema);

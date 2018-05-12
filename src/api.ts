@@ -33,6 +33,5 @@ app.listen(process.env.PORT || 4000, () => console.log('Example app listening on
 
 // for events
 app.use('/api', routes)
-
 // for stats
 app.use('/api', stats)
